@@ -26,7 +26,7 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(
-    "mongodb+srv://sagar3715:TUD03iXdxCgvhnzX@cluster0.jjie4rf.mongodb.net/blog?retryWrites=true"
+    "your mongoDB URI"
   )
   .then((result) => {
     app.listen(3000, () => {
