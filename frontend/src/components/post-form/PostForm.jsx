@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { Button, Input } from "../index";
 import postService from "../../services/config";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addPost, updatePost } from "../../store/postSlice";
 
 function PostForm({ post }) {
   const { register, handleSubmit, watch, setValue } = useForm({
@@ -12,9 +13,11 @@ function PostForm({ post }) {
       title: post?.title || "",
       slug: post?.slug || "",
       description: post?.description || "",
-      category: post?.category || "active",
+      category: post?.category || "",
     },
   });
+
+  const dispatch = useDispatch();
 
   const userToken = useSelector((state) => state.auth.userData.token);
 
@@ -29,8 +32,10 @@ function PostForm({ post }) {
         },
         userToken
       );
+      console.log(dbPost);
 
       if (dbPost) {
+        dispatch(updatePost(dbPost.data.post));
         navigate(`/post/${dbPost.data.post._id}`);
       }
     } else {
@@ -42,6 +47,7 @@ function PostForm({ post }) {
       );
 
       if (dbPost) {
+        dispatch(addPost(dbPost.data.post));
         navigate(`/post/${dbPost.data.post._id}`);
       }
     }

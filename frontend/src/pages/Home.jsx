@@ -1,24 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import postService from "../services/config";
 import { Container, PostCard } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../store/postSlice";
 
 function Home() {
-  const [posts, setPosts] = useState([]);
+  // const [posts, setPosts] = useState([]);
   const authStatus = useSelector((state) => state.auth.status);
   const userToken = useSelector((state) => state.auth?.userData?.token);
+  const posts = useSelector((state) => state.posts.posts);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    postService
-      .getPosts(userToken)
-      .then((posts) => {
-        if (posts) {
-          dispatch(getPosts(posts.data.posts));
-        }
-      })
-      .catch((err) => console.log(err));
+    console.log(posts);
+    if (posts.length  === 0) {
+      console.log(userToken);
+      postService
+        .getPosts(userToken)
+        .then((posts) => {
+          if (posts) {
+            dispatch(getPosts(posts.data.posts));
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   }, [userToken]);
 
   if (posts.length === 0 && !authStatus) {

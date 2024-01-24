@@ -45,7 +45,7 @@ export class Service {
 
   async deletePost(id, token) {
     try {
-      return await axios.put(this.ApiUrl + "post/" + id, {
+      return await axios.delete(this.ApiUrl + "post/" + id, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -68,15 +68,6 @@ export class Service {
       return false;
     }
   }
-
-  // async getPost(slug) {
-  //   try {
-
-  //   } catch (error) {
-  //     console.log(error);
-  //     return false;
-  //   }
-  // }
 }
 
 const service = new Service();
