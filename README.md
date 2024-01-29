@@ -1,11 +1,14 @@
-# Foobar
-
-clone project
+# Clone project
 
 add your mongodb URI in app.js file in Backend directory
 
 ```js
 "mongodb+srv://<YourId>:<Password>@<Host>/blog"
+```
+
+also make .env file with below fields Frontend directory
+```js
+VITE_API_URL = "http://localhost:3000/"
 ```
 
 
