@@ -6,7 +6,7 @@ add your mongodb URI in app.js file in Backend directory
 "mongodb+srv://<YourId>:<Password>@<Host>/blog"
 ```
 
-also make .env file with below fields Frontend directory
+also make .env file with below fields in Frontend directory
 ```js
 VITE_API_URL = "http://localhost:3000/"
 ```
